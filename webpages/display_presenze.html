@@ -15,7 +15,7 @@
       // draws it.
 
       function drawPresenzeApolloni() {
-          var query = new google.visualization.Query("http://apolloni.dyndns.org:8580/cgi-bin/presenzeapolloni/presence_summary.py?month="+document.getElementById("month").value);
+          var query = new google.visualization.Query(window.location.origin+"/cgi-bin/presenzeapolloni/presence_summary.py?month="+document.getElementById("month").value);
           query.send(handleQueryResponse);
       }
 
@@ -29,6 +29,10 @@
   </head>
 
   <body>
+    <div id="baseurl_div"></div>
+    <script>
+         document.getElementById("baseurl_div").innerHTML = window.location.origin
+   </script>
 Mese: <input type=text placeholder="YYYY-MM" id=month> <button onclick="drawPresenzeApolloni()">Invia</button><br>
     <!--Div that will hold the chart-->
     <div id="presenze_div"></div>
