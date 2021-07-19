@@ -43,7 +43,7 @@ for filename in files:
           monthlypresences.append(presences)
        timestampstring=timestampline[1]+" "+timestampline[2]
        timestamp = datetime.datetime.strptime(timestampstring,"%Y-%m-%d %H:%M:%S")
-       presences={'Timestamp':timestamp,'Andrea':0,'Fabrizio':0,'Franco':0,'Giacomo':0,'Giovanni':0,'Vitaliano':0,'Ospite':0,'Sconosciuto':0}
+       presences={'Timestamp':timestamp,'Andrea':0,'Fabrizio':0,'Franco':0,'Giacomo':0,'Giovanni':0,'Vitaliano':0,'Rudy':0,'Ospite':0,'Sconosciuto':0}
      else:
        name=findowner(timestampline[0])
        if name != "***":
@@ -63,6 +63,7 @@ description = {"Timestamp":("datetime","Data"),
                "Giacomo":("number","Giacomo"),
                "Giovanni":("number","Giovanni"),
                "Vitaliano":("number","Vitaliano"),
+               "Rudy":("number","Rudy"),
                "Ospite":("number","Ospite"),
                "Sconosciuto":("number","Sconosciuto")}
 data = monthlypresences
@@ -71,7 +72,7 @@ data_table=gviz_api.DataTable(description)
 data_table.LoadData(data)
 print "Content-type: text/plain"
 print
-#print data_table.ToJSonResponse(columns_order=("Timestamp","Andrea","Fabrizio","Franco","Giacomo","Giovanni","Vitaliano","Sconosciuto"),
+#print data_table.ToJSonResponse(columns_order=("Timestamp","Andrea","Fabrizio","Franco","Giacomo","Giovanni","Vitaliano","Rudy","Sconosciuto"),
 #                                order_by="Timestamp")
-print data_table.ToResponse(columns_order=("Timestamp","Andrea","Fabrizio","Franco","Giacomo","Giovanni","Vitaliano","Ospite","Sconosciuto"),
+print data_table.ToResponse(columns_order=("Timestamp","Andrea","Fabrizio","Franco","Giacomo","Giovanni","Vitaliano","Rudy","Ospite","Sconosciuto"),
                                 order_by="Timestamp",tqx=tqxstring)
