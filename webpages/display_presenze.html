@@ -6,6 +6,7 @@
 
       // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
+      google.charts.load('current', {'packages':['table']});
 
       // Set a callback to run when the Google Visualization API is loaded.
 //      google.charts.setOnLoadCallback(drawPresenzeApolloni);
@@ -17,12 +18,20 @@
       function drawPresenzeApolloni() {
           var query = new google.visualization.Query(window.location.origin+"/cgi-bin/presenzeapolloni/presence_summary.py?month="+document.getElementById("month").value);
           query.send(handleQueryResponse);
+          var unknownquery = new google.visualization.Query(window.location.origin+"/cgi-bin/presenzeapolloni/unknown_table.py?month="+document.getElementById("month").value);
+          unknownquery.send(handleUnknownQueryResponse);
       }
 
       function handleQueryResponse(response) {
           var data = response.getDataTable();
           var visualization = new google.visualization.LineChart(document.getElementById('presenze_div'));
           visualization.draw(data,{legend:"Presenze"});
+      }
+
+      function handleUnknownQueryResponse(response) {
+          var data = response.getDataTable();
+          var visualization = new google.visualization.Table(document.getElementById('sconosciuti_div'));
+          visualization.draw(data,{legend:"Sconosciuti"});
       }
 
     </script>
@@ -36,6 +45,7 @@
 Mese: <input type=text placeholder="YYYY-MM" id=month> <button onclick="drawPresenzeApolloni()">Invia</button><br>
     <!--Div that will hold the chart-->
     <div id="presenze_div"></div>
+    <div id="sconosciuti_div"></div>
   </body>
 </html>
 

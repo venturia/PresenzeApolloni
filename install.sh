@@ -30,3 +30,4 @@ fi
 echo "copying py files"
 cp -v webpages/*.py ${CGIDIR}/presenzeapolloni/.
 chmod +x ${CGIDIR}/presenzeapolloni/presence_summary.py
+chmod +x ${CGIDIR}/presenzeapolloni/unknown_table.py
